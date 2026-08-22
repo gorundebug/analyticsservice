@@ -15,7 +15,7 @@ ACT_VERSION := v0.2.74
 ACT := $(TOOLS_DIR)/act
 OS := $(shell uname -s)
 ARCH := $(shell uname -m)
-SERVICELIB_SOURCE_CONTEXT ?= https://github.com/gorundebug/servicelib.git#v0.2.2
+SERVICELIB_SOURCE_CONTEXT ?= https://github.com/gorundebug/servicelib.git#v0.2.3
 SERVICEGEN_RUNTIME_STRIP ?= ON
 
 .PHONY: all build clean run test lint lint-fix act gen-proto service_build service_build_linux service_build_linux_debug fmt-proto docker-build docker-build-local hooks
@@ -62,12 +62,14 @@ docker-build:
 	@if [ -n "$(PROJECT_DIR)" ] && [ -f "$(PROJECT_DIR)/go.work" ]; then \
 		docker build -f "$(MODULE_DIR)/Dockerfile" \
 			--build-context servicelib-source="$(SERVICELIB_SOURCE_CONTEXT)" \
+			--build-arg GOPROXY="$${GOPROXY:-https://proxy.golang.org,direct}" \
 			--build-arg SERVICE_DIR="$(SERVICE_NAME)" \
 			--build-arg SERVICEGEN_RUNTIME_STRIP="$(SERVICEGEN_RUNTIME_STRIP)" \
 			-t $(SERVICE_NAME):latest "$(PROJECT_DIR)"; \
 	else \
 		docker build \
 			--build-context servicelib-source="$(SERVICELIB_SOURCE_CONTEXT)" \
+			--build-arg GOPROXY="$${GOPROXY:-https://proxy.golang.org,direct}" \
 			--build-arg SERVICEGEN_RUNTIME_STRIP="$(SERVICEGEN_RUNTIME_STRIP)" \
 			-t $(SERVICE_NAME):latest .; \
 	fi

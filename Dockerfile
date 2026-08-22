@@ -8,6 +8,8 @@ FROM golang:1.25-bookworm AS builder
 ARG SERVICE_DIR=.
 ARG TARGETARCH
 ARG SERVICEGEN_RUNTIME_STRIP=ON
+ARG GOPROXY=https://proxy.golang.org,direct
+ENV GOPROXY=${GOPROXY}
 COPY --from=servicelib-source / /servicelib
 COPY . /workspace
 WORKDIR /workspace/${SERVICE_DIR}
