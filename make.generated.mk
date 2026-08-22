@@ -15,7 +15,7 @@ ACT_VERSION := v0.2.74
 ACT := $(TOOLS_DIR)/act
 OS := $(shell uname -s)
 ARCH := $(shell uname -m)
-SERVICELIB_SOURCE_CONTEXT ?= https://github.com/gorundebug/servicelib.git#v0.2.3
+SERVICELIB_SOURCE_CONTEXT ?= https://github.com/gorundebug/servicelib.git#v0.2.4
 SERVICEGEN_RUNTIME_STRIP ?= ON
 
 .PHONY: all build clean run test lint lint-fix act gen-proto service_build service_build_linux service_build_linux_debug fmt-proto docker-build docker-build-local hooks
