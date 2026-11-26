@@ -6,7 +6,7 @@ require (
 	github.com/gorundebug/model_go v0.2.184
 	github.com/gorundebug/servicelib v0.2.184
 	github.com/stretchr/testify v1.12.1
-	golang.org/x/sync v0.23.0
+	golang.org/x/sync v0.25.0
 )
 
 require (
